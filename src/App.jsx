@@ -6,15 +6,6 @@ import './App.css'
 
 // Prettier
 
-const styles = {
-  display: 'flex',
-  flexDirection: "column",
-  width: "fit-content",
-  margin: "2rem auto",
-  padding: '24px',
-  border: '1px solid black'
-}
-
 function App() {
   const name = "Кеды";
   const [cost, setCost] = useState(1500);
@@ -31,12 +22,18 @@ function App() {
     setCost(0);
   }
 
+  const cardClasses = [
+    "card",
+    cost === 0 && "free"
+  ].filter(cls => Boolean(cls));
+
   return (
     <>
-      <div style={styles}>
+      <div className={cardClasses.join(' ')} style={{
+        backgroundColor: cost > 0 ? "white" : "green"
+      }}>
         <h2>{name}</h2>
         <p>{priceSpan}</p>
-        <p>{ cost > 0 ? `${cost} ₽`: "Бесплатновое" }</p>
         { cost > 0 &&
           (<button onClick={makeFree}>
             Сделать коммунизм
@@ -48,3 +45,23 @@ function App() {
 }
 
 export default App
+
+// Практика 1:
+//  В переменной задана стоимость
+//  покупки акции и текущая стоимость
+//  (startPrice, currentPrice)
+//  
+//  В интерфейсе необходимо вывести
+//  Текущую стоимость
+//  и разницу с припиской "Прибыль" / "Убыток"
+//  в зависимости от того, больше или меньше она нуля
+
+// Практика 2:
+//  В предыдущей практике, если получен убыток, 
+//  то текст выделяется красным,
+//  если прибыль - зеленым
+//  (реализовать через условные классы)
+//  
+//  Шрифт текста 2rem, 
+//  если абсолютная разница больше 100
+//  реализовать чсерез style
