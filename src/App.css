@@ -2,12 +2,18 @@
   color: black;
   display: flex;
   flex-direction: column;
-  text-align: center;
+  border-radius: 8px;
+  gap: 0;
   width: fit-content;
   margin: 2rem auto;
-  padding: 24px;
+  padding: 8px 48px;
   border: 1px solid black;
   transition: background-color 0.5s;
+}
+
+.author {
+  font-size: 1.1rem;
+  font-style: italic;
 }
 
 .card.free {

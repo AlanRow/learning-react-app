@@ -7,39 +7,51 @@ import './App.css'
 // Prettier
 
 function App() {
-  const name = "Кеды";
-  const [cost, setCost] = useState(1500);
-  
-  let priceSpan;
+  const messages = [
+    "Hello, everyone!",
+    "Hello, Jamey",
+    "How are you?",
+    "I'm fine",
+    "London is the capital of Great Britain"
+  ]
+  // const message = "Hello, everyone!"
+  // const author = "Jamey"
 
-  if (cost > 0) {
-    priceSpan = (<span>{cost} ₽</span>)
-  } else {
-    priceSpan = (<span>Бесплатновое</span>)
-  }
-
-  function makeFree() {
-    setCost(0);
-  }
-
-  const cardClasses = [
-    "card",
-    cost === 0 && "free"
-  ].filter(cls => Boolean(cls));
+  const messagesList = messages.map(m => (
+    <div className="card">
+      <div>{m}</div>
+    </div>
+  ))
 
   return (
     <>
-      <div className={cardClasses.join(' ')} style={{
-        backgroundColor: cost > 0 ? "white" : "green"
-      }}>
-        <h2>{name}</h2>
-        <p>{priceSpan}</p>
-        { cost > 0 &&
-          (<button onClick={makeFree}>
-            Сделать коммунизм
-          </button>)
-        }
+      <div>
+        {messagesList}
       </div>
+
+      {/* <div className="card">
+        <div>{message}</div>
+        <div className="author">{author}</div>
+      </div> */}
+
+      { /** КАК НЕ НАДО ДЕЛАТЬ! */}
+      {/* <div>
+        <div className="card">
+          <div>{messages[0]}</div>
+        </div>
+        <div className="card">
+          <div>{messages[1]}</div>
+        </div>
+        <div className="card">
+          <div>{messages[2]}</div>
+        </div>
+        <div className="card">
+          <div>{messages[3]}</div>
+        </div>
+        <div className="card">
+          <div>{messages[4]}</div>
+        </div>
+      </div> */}
     </>
   )
 }
@@ -62,6 +74,6 @@ export default App
 //  если прибыль - зеленым
 //  (реализовать через условные классы)
 //  
-//  Шрифт текста 2rem, 
+//  Шрифт текста (font-size) 2rem, 
 //  если абсолютная разница больше 100
 //  реализовать чсерез style
