@@ -7,27 +7,62 @@ import './App.css'
 // Prettier
 
 function App() {
-  const messages = [
-    "Hello, everyone!",
-    "Hello, Jamey",
-    "How are you?",
-    "I'm fine",
-    "London is the capital of Great Britain"
-  ]
+  const [messages, setMessages] = useState([
+    {
+      id: 1,
+      message: "Hello, everyone!",
+      author: "Jamey",
+      removed: false,
+    },
+    {
+      id: 2,
+      message: "Hello, Jamey",
+      author: "Sam",
+      removed: true,
+    },
+    {
+      id: 3,
+      message: "How are you?",
+      author: "Jamey",
+      removed: false,
+    },
+  ])
+
   // const message = "Hello, everyone!"
   // const author = "Jamey"
 
-  const messagesList = messages.map(m => (
-    <div className="card">
-      <div>{m}</div>
+  const messagesList = messages.filter(m => !m.removed).map((m, i) => (
+    <div key={i} className="card">
+      <div>{m.message}</div>
+      <div className="author">{m.author}</div>
     </div>
   ))
 
+  function addMessage() {
+    const newMessages = [...messages, {
+      id: messages.length + 1,
+      message: "New message",
+      author: "Kolin",
+      removed: false,
+    }]
+    // НЕ РАБОТАЕТ
+    // messages.push({
+    //   id: messages.length + 1,
+    //   message: "New message",
+    //   author: "Kolin",
+    //   removed: false,
+    // })
+    setMessages(messages)
+  }
   return (
     <>
-      <div>
+      <div className='container'>
         {messagesList}
+        <div>
+          <button onClick={addMessage}>Add message</button>
+        </div>
       </div>
+
 
       {/* <div className="card">
         <div>{message}</div>
@@ -58,22 +93,16 @@ function App() {
 
 export default App
 
-// Практика 1:
-//  В переменной задана стоимость
-//  покупки акции и текущая стоимость
-//  (startPrice, currentPrice)
-//  
-//  В интерфейсе необходимо вывести
-//  Текущую стоимость
-//  и разницу с припиской "Прибыль" / "Убыток"
-//  в зависимости от того, больше или меньше она нуля
+// Практика 1, вариант 1:
+// Вывести список на 15 пунктов футбольных команд в 
+// чемпионате мира со следующими параметрами:
+//  - место
+//  - страна
+//  - число побед
 
-// Практика 2:
-//  В предыдущей практике, если получен убыток, 
-//  то текст выделяется красным,
-//  если прибыль - зеленым
-//  (реализовать через условные классы)
-//  
-//  Шрифт текста (font-size) 2rem, 
-//  если абсолютная разница больше 100
-//  реализовать чсерез style
+// Практика 1, вариант 2:
+// Вывести список машин в автосалоне:
+//  - марка
+//  - цвет
+//  - мощность двигателя
+//  - стоимость
