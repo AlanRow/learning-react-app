@@ -4,6 +4,8 @@ import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import './App.css'
 
+import MessageCard from './components/MessageCard'
+
 // Prettier
 
 function App() {
@@ -31,13 +33,6 @@ function App() {
   // const message = "Hello, everyone!"
   // const author = "Jamey"
 
-  const messagesList = messages.filter(m => !m.removed).map((m, i) => (
-    <div key={i} className="card">
-      <div>{m.message}</div>
-      <div className="author">{m.author}</div>
-    </div>
-  ))
-
   function addMessage() {
     setMessages((lastMessages) => [...lastMessages, {
       id: messages.length + 1,
@@ -49,7 +44,7 @@ function App() {
   return (
     <>
       <div className='container'>
-        {messagesList}
+        <MessageCard message="Hello"></MessageCard>
         <div>
           <button onClick={addMessage}>Add message</button>
         </div>
