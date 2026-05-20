@@ -5,7 +5,7 @@ import heroImg from './assets/hero.png'
 import './App.css'
 
 import MessageCard from './components/MessageCard'
-
+import AddMessageButton from './components/AdddMessageButton'
 // Prettier
 
 function App() {
@@ -44,9 +44,14 @@ function App() {
   return (
     <>
       <div className='container'>
-        <MessageCard message="Hello"></MessageCard>
+        { messages.map(message => 
+          (<MessageCard
+              message={message.message}
+              author={message.author} 
+            />)
+          ) }
         <div>
-          <button onClick={addMessage}>Add message</button>
+          <AddMessageButton handleClick={addMessage} />
         </div>
       </div>
     </>
@@ -59,3 +64,7 @@ export default App
 // Создать страницу со списком задач, где можно
 // - добавлять новую задачу (с названием "Задача #N")
 // - удалять существующую задачу, кликнув по кнопке на ней
+
+// Практика 2
+// Вынести элемент списка в отдельный компонент 
+// с пропсами number и handleRemove
