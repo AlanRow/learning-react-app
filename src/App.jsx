@@ -39,20 +39,12 @@ function App() {
   ))
 
   function addMessage() {
-    const newMessages = [...messages, {
+    setMessages((lastMessages) => [...lastMessages, {
       id: messages.length + 1,
       message: "New message",
       author: "Kolin",
       removed: false,
-    }]
-    // НЕ РАБОТАЕТ
-    // messages.push({
-    //   id: messages.length + 1,
-    //   message: "New message",
-    //   author: "Kolin",
-    //   removed: false,
-    // })
-    setMessages(messages)
+    }])
   }
   return (
     <>
@@ -62,47 +54,13 @@ function App() {
           <button onClick={addMessage}>Add message</button>
         </div>
       </div>
-
-
-      {/* <div className="card">
-        <div>{message}</div>
-        <div className="author">{author}</div>
-      </div> */}
-
-      { /** КАК НЕ НАДО ДЕЛАТЬ! */}
-      {/* <div>
-        <div className="card">
-          <div>{messages[0]}</div>
-        </div>
-        <div className="card">
-          <div>{messages[1]}</div>
-        </div>
-        <div className="card">
-          <div>{messages[2]}</div>
-        </div>
-        <div className="card">
-          <div>{messages[3]}</div>
-        </div>
-        <div className="card">
-          <div>{messages[4]}</div>
-        </div>
-      </div> */}
     </>
   )
 }
 
 export default App
 
-// Практика 1, вариант 1:
-// Вывести список на 15 пунктов футбольных команд в 
-// чемпионате мира со следующими параметрами:
-//  - место
-//  - страна
-//  - число побед
-
-// Практика 1, вариант 2:
-// Вывести список машин в автосалоне:
-//  - марка
-//  - цвет
-//  - мощность двигателя
-//  - стоимость
+// Практика 1
+// Создать страницу со списком задач, где можно
+// - добавлять новую задачу (с названием "Задача #N")
+// - удалять существующую задачу, кликнув по кнопке на ней
