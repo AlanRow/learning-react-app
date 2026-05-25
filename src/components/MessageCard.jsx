@@ -1,5 +1,4 @@
 function MessageCard(props) {
-
     return (
     <div className="card">
       <div>{ props.message }</div>

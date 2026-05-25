@@ -4,56 +4,45 @@ import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import './App.css'
 
-import MessageCard from './components/MessageCard'
-import AddMessageButton from './components/AdddMessageButton'
-// Prettier
+import UserCard from './components/UserCard'
+import UserCardEditable from './components/UserCardEditable'
 
 function App() {
-  const [messages, setMessages] = useState([
-    {
-      id: 1,
-      message: "Hello, everyone!",
-      author: "Jamey",
-      removed: false,
-    },
-    {
-      id: 2,
-      message: "Hello, Jamey",
-      author: "Sam",
-      removed: true,
-    },
-    {
-      id: 3,
-      message: "How are you?",
-      author: "Jamey",
-      removed: false,
-    },
-  ])
+  const [ isEditing, setEditing ] = useState(false)
 
-  // const message = "Hello, everyone!"
-  // const author = "Jamey"
-
-  function addMessage() {
-    setMessages((lastMessages) => [...lastMessages, {
-      id: messages.length + 1,
-      message: "New message",
-      author: "Kolin",
-      removed: false,
-    }])
+  function toggleMode() {
+    setEditing(!isEditing);
   }
+
+  const data = {
+    username: "Виктор",
+    age: 23,
+    isMale: true,
+    bio: "Ничего интересного"
+  }
+
+  const [ user, setUser ] = useState(data);
+  function changeUser(newUserData) {
+    setUser({ ...user, ...newUserData })
+  }
+
+  const UserCardTemplate = isEditing ? 
+    UserCardEditable :
+    UserCard;
+
   return (
     <>
-      <div className='container'>
-        { messages.map(message => 
-          (<MessageCard
-              message={message.message}
-              author={message.author} 
-            />)
-          ) }
-        <div>
-          <AddMessageButton handleClick={addMessage} />
-        </div>
-      </div>
+      <UserCardTemplate
+        username={user.username}
+        age={user.age}
+        isMale={user.isMale}
+        bio={user.bio}
+        handleChange={changeUser}
+      />
+
+      <button onClick={toggleMode}>
+        { isEditing ? 'Просмотр' : 'Редактирование' }
+      </button>
     </>
   )
 }
