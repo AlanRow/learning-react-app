@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
@@ -9,6 +9,8 @@ import UserCardEditable from './components/UserCardEditable'
 
 function App() {
   const [ isEditing, setEditing ] = useState(false)
+  const [ isChanged, setChanged ] = useState(false)
+  const [ isFirstRender, setFirstRender ] = useState(true)
 
   function toggleMode() {
     setEditing(!isEditing);
@@ -25,6 +27,17 @@ function App() {
   function changeUser(newUserData) {
     setUser({ ...user, ...newUserData })
   }
+
+  useEffect(() => {
+    console.log("User data changed: ", new Date(Date.now()))
+    console.log(JSON.stringify(user, null, 4));
+
+    if (isFirstRender) {
+      setFirstRender(false)
+    } else {
+      setChanged(true)
+    }
+  }, [user])
 
   const UserCardTemplate = isEditing ? 
     UserCardEditable :
@@ -43,6 +56,11 @@ function App() {
       <button onClick={toggleMode}>
         { isEditing ? 'Просмотр' : 'Редактирование' }
       </button>
+      { isChanged && (
+        <button onClick={() => setChanged(false)}>
+          Сохранить
+        </button> )
+      }
     </>
   )
 }
@@ -56,3 +74,12 @@ export default App
 // - sex (пол)
 // - bio (описание)
 // И  отрисовывает данные 
+
+// Практика 2: хватит шопинга!
+// У пользователя есть кнопка купить и он очень любит ее нажимать
+// Его не останавливает даже то, что средства у него закончились
+// Добавьте на страницу следующие элементы:
+//   -- текущий баланс
+//  -- кнопку "Купить", которая уменьшает баланс на 100
+//  -- alert оповещение если баланс пользователя опустился ниже нуля
+//     (но только один раз, дальше - его проблемы)
