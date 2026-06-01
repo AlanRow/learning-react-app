@@ -2,22 +2,21 @@ import { useState, useEffect } from 'react'
 import './App.css'
 
 import AlertButton from './components/AlertButton'
-import MetaTitleInput from './components/MetaTitleInput'
+import Stopwatch from './components/Stopwatch'
 
 function App() {
-  const [text, setText] = useState("State 1") 
+  const [hasTimer, setHasTimer] = useState(true)
 
-  const changeText = () => {
-    setText(text + "1")
-  }
-
-  const setTextDefault = () => {
-    setText("State 1")
+  function toggleTimer() {
+    setHasTimer(!hasTimer)
   }
 
   return (
     <>
-      <MetaTitleInput />
+      <button onClick={toggleTimer}>
+        { hasTimer ? 'Hide' : 'Show' } таймер
+        </button>
+      { hasTimer && <Stopwatch /> }
     </>
   )
 }
