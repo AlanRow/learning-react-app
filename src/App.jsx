@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import './App.css'
 
 import AlertButton from './components/AlertButton'
+import MetaTitleInput from './components/MetaTitleInput'
 
 function App() {
   const [text, setText] = useState("State 1") 
@@ -16,12 +17,7 @@ function App() {
 
   return (
     <>
-      <AlertButton
-        text={text}
-        handleClick={changeText}
-      />
-
-      <button onClick={setTextDefault}>Set Default</button>
+      <MetaTitleInput />
     </>
   )
 }
