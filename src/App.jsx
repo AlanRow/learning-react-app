@@ -1,30 +1,14 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 
-import AlertButton from './components/AlertButton'
-import Stopwatch from './components/Stopwatch'
+import CatImage from "./assets/cat.jpg"
 
 function App() {
-  const [hasTimer, setHasTimer] = useState(true)
-  const [maxTime, setMaxTime] = useState(10)
-
-  function toggleTimer() {
-    setHasTimer(!hasTimer)
-  }
-
-  function upMaxTime() {
-    setMaxTime(20)
-  }
+  const [image, setImage] = useState("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRS0IQhVr9DDJCq61QX28zCoiqDrvezBh5ylw&s")
 
   return (
     <>
-    <div>
-        <button onClick={toggleTimer}>
-          { hasTimer ? 'Hide' : 'Show' } таймер
-          </button>
-          <button onClick={upMaxTime}>Set max time 20</button>
-        </div>
-      { hasTimer && <Stopwatch maxTime={maxTime} /> }
+    <img width="100" src={CatImage} />
     </>
   )
 }
@@ -32,9 +16,8 @@ function App() {
 export default App
 
 // Практика 1:
-// Напишите компонент MetaTitleInput,
-//  который содержит input напрямую связанный
-//  с заголовком страницы, при изменении значения
-//  в input меняется и заголовок страницы
-//  (Пояснение: значение инпута поместите в useState
-//   и примените к нему useEffect)
+//  У нас есть сайт со списком картинок из которых 
+//  показана лишь одна, все картинки лежат в списке
+//  и текущую для показа надо переключать кнопками 
+//  "Предыдущая" и "Следующая" 
+
