@@ -1,14 +1,32 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 
-import CatImage from "./assets/cat.jpg"
+import CatImage1 from "./assets/cat.jpg"
+import CatImage2 from "./assets/cat2.jpg"
+
+const IMAGES_LIST = [CatImage1, CatImage2]
 
 function App() {
-  const [image, setImage] = useState("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRS0IQhVr9DDJCq61QX28zCoiqDrvezBh5ylw&s")
+  const [ imageIndex, setImageIndex ] = useState(0)
+
+  function nextImage() {
+    setImageIndex((imageIndex + 1) % IMAGES_LIST.length);
+  }
+
+  function prevImage() {
+    setImageIndex(imageIndex <= 0 ? 
+      IMAGES_LIST.length - 1 : imageIndex - 1);
+  }
+
+  const image = IMAGES_LIST[imageIndex];
 
   return (
     <>
-    <img width="100" src={CatImage} />
+    <img width="100" height="100" src={image} />
+    <div>
+      <button onClick={prevImage}>Prev</button>
+      <button onClick={nextImage}>Next</button>
+    </div>
     </>
   )
 }
