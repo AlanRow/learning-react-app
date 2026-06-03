@@ -6,17 +6,25 @@ import Stopwatch from './components/Stopwatch'
 
 function App() {
   const [hasTimer, setHasTimer] = useState(true)
+  const [maxTime, setMaxTime] = useState(10)
 
   function toggleTimer() {
     setHasTimer(!hasTimer)
   }
 
+  function upMaxTime() {
+    setMaxTime(20)
+  }
+
   return (
     <>
-      <button onClick={toggleTimer}>
-        { hasTimer ? 'Hide' : 'Show' } таймер
-        </button>
-      { hasTimer && <Stopwatch /> }
+    <div>
+        <button onClick={toggleTimer}>
+          { hasTimer ? 'Hide' : 'Show' } таймер
+          </button>
+          <button onClick={upMaxTime}>Set max time 20</button>
+        </div>
+      { hasTimer && <Stopwatch maxTime={maxTime} /> }
     </>
   )
 }

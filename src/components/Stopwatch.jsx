@@ -1,18 +1,29 @@
 import { useState, useEffect } from "react"
 
-function Stopwatch() {
+function Stopwatch(props) {
     const [timer, setTimer] = useState(0);
 
     useEffect(() => {
-        const intervalId = setInterval(() => {
-            console.log(timer)
-            setTimer(timer => timer + 1)
+        // Код выполняется при монтировании
+        // потому что в зависимостях пусто ([])
+        const intervalId = setInterval(function() {
+            setTimer(timer => timer < props.maxTime ? 
+                timer + 1 :
+                0
+            )
         }, 1000)
 
+        // эта функция вызовется при размонтировании
+        // из-за return
         return () => {
             clearInterval(intervalId)
         }
     }, [])
+
+    // Вызовется при обновлении maxTime
+    useEffect(() => {
+        setTimer(0)
+    }, [props.maxTime])
 
     return (<span>{timer}</span>)
 }
