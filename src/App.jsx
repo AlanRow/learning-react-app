@@ -4,6 +4,7 @@ import './App.css'
 import { BrowserRouter, Routes, Route  } from "react-router-dom"
 import AuthForm from './components/AuthForm'
 import WelcomePage from './components/WelcomePage'
+import UserInfo from './components/UserInfo'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Routes>
             <Route path="/" element={ <WelcomePage /> } />
             <Route path="/auth" element={ <AuthForm /> }/>
+            <Route path="/user/:id" element={ <UserInfo /> }/>
         </Routes>
       </BrowserRouter>
     </>
@@ -35,7 +37,7 @@ export default App
 // а вторая - на кэшбек в 150
 //  При клике на любую из ссылок мы переходим 
 // по адресу /buy?code={промокод}
-// Там надодится итоговая стоимость и
+// Там находится итоговая стоимость и
 // прмокод: если его нету, то и блока с
 //  кодом тоже нету 
 
