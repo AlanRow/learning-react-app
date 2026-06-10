@@ -1,26 +1,17 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import './App.css'
 
-import pow from "./utils/calc"
-import AlertButton from './components/AlertButton';
-
 function App() {
-  const [a, setA] = useState(1)
-  const [b, setB] = useState(0)
-  const [res, setRes] = useState(pow(a, b))
+  const inputRef = useRef(null)
 
-  function updateRes() {
-    setRes(pow(a, b))
-  }
+  useEffect(() => {
+    inputRef.current.focus()
+  }, [])
 
   return (
     <>
       <div>
-        <input value={a} onChange={(e) => setA(e.target.value)} />
-        <span>^</span>
-        <input value={b} onChange={(e) => setB(e.target.value)} />
-        <button onClick={updateRes}>=</button>
-        <span>{res}</span>
+        <input ref={inputRef}></input>
       </div>
     </>
   )
