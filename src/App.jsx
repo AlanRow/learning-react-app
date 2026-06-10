@@ -1,21 +1,27 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 
-import calc, { plus, minus } from "./utils/calc"
+import pow from "./utils/calc"
 import AlertButton from './components/AlertButton';
 
 function App() {
-  const a = 10;
-  const b = 15;
+  const [a, setA] = useState(1)
+  const [b, setB] = useState(0)
+  const [res, setRes] = useState(pow(a, b))
+
+  function updateRes() {
+    setRes(pow(a, b))
+  }
+
   return (
     <>
       <div>
-        <AlertButton text="Imported"></AlertButton>
+        <input value={a} onChange={(e) => setA(e.target.value)} />
+        <span>^</span>
+        <input value={b} onChange={(e) => setB(e.target.value)} />
+        <button onClick={updateRes}>=</button>
+        <span>{res}</span>
       </div>
-      <h1>{ plus(a, b) }</h1>
-      <h1>{ minus(a, b) }</h1>
-      <h1>{ calc.plus(a, b) }</h1>
-      <h1>{ calc.minus(a, b) }</h1>
     </>
   )
 }
