@@ -1,21 +1,21 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 
-import { BrowserRouter, Routes, Route  } from "react-router-dom"
-import AuthForm from './components/AuthForm'
-import WelcomePage from './components/WelcomePage'
-import UserInfo from './components/UserInfo'
+import calc, { plus, minus } from "./utils/calc"
+import AlertButton from './components/AlertButton';
 
 function App() {
+  const a = 10;
+  const b = 15;
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-            <Route path="/" element={ <WelcomePage /> } />
-            <Route path="/auth" element={ <AuthForm /> }/>
-            <Route path="/user/:id" element={ <UserInfo /> }/>
-        </Routes>
-      </BrowserRouter>
+      <div>
+        <AlertButton text="Imported"></AlertButton>
+      </div>
+      <h1>{ plus(a, b) }</h1>
+      <h1>{ minus(a, b) }</h1>
+      <h1>{ calc.plus(a, b) }</h1>
+      <h1>{ calc.minus(a, b) }</h1>
     </>
   )
 }
@@ -23,23 +23,11 @@ function App() {
 export default App
 
 // Практика 1:
-//  Надо написать страницу сайта цветочного магазина
-//  (или любой другой сайт) с хедером, в котором
-//  находятся две вкладки:
-//  1) основная страница с описанием сайта (/)
-//  2) страница с контактами (телефон и почта) (/contacts)
-// 
-//  Для ссылок в хедере используйте Link
-
-// Практика 2: Промокоды
-// По адресу / лежит страница с двумя рекламными ссылками на товар
-// Первая дает промокод на скидку в 100 рублей, 
-// а вторая - на кэшбек в 150
-//  При клике на любую из ссылок мы переходим 
-// по адресу /buy?code={промокод}
-// Там находится итоговая стоимость и
-// прмокод: если его нету, то и блока с
-//  кодом тоже нету 
+// Напишите приложение калькулятор, которое принимает
+// два числа в инпуты и возводит первое в степень 
+// второго при клеке на кнопку "="
+// Примечание: все функции, кроме компонентов
+//  должны импортироваться из файла /utils/calc.js
 
 
 
