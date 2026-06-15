@@ -1,23 +1,19 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 
 function Stopwatch(props) {
     const [timer, setTimer] = useState(0);
 
+    const intervalId = useRef(null)
+    const previousTimer = useRef(null)
+
     useEffect(() => {
         // Код выполняется при монтировании
         // потому что в зависимостях пусто ([])
-        const intervalId = setInterval(function() {
-            setTimer(timer => timer < props.maxTime ? 
-                timer + 1 :
-                0
-            )
+        previousTimer.current = timer
+        intervalId.current = setInterval(function() {
+            setTimer(previousTimer.current + 1);
+            previousTimer.current = timer
         }, 1000)
-
-        // эта функция вызовется при размонтировании
-        // из-за return
-        return () => {
-            clearInterval(intervalId)
-        }
     }, [])
 
     // Вызовется при обновлении maxTime
