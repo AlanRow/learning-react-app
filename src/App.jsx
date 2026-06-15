@@ -1,17 +1,39 @@
-import { useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import './App.css'
+import Stopwatch from "./components/Stopwatch"
+
+
 
 function App() {
-  const inputRef = useRef(null)
+  let counter1 = 0;
 
-  useEffect(() => {
-    inputRef.current.focus()
-  }, [])
+  function upCounter1() {
+    counter1 += 1;
+  }
+
+  const [ counter2, setCounter2 ] = useState(0)
+  function upCounter2() {
+    setCounter2(counter2 + 1)
+  }
+
+  let counter3 = useRef(0)
+  function upCounter3() {
+    counter3.current += 1
+  }
 
   return (
     <>
       <div>
-        <input ref={inputRef}></input>
+        <p>Counter 1: {counter1}</p>
+        <button onClick={upCounter1}>Up</button>
+      </div>
+      <div>
+        <p>Counter 2: {counter2}</p>
+        <button onClick={upCounter2}>Up</button>
+      </div>
+      <div>
+        <p>Counter 3: {counter3.current}</p>
+        <button onClick={upCounter3}>Up</button>
       </div>
     </>
   )
@@ -20,11 +42,11 @@ function App() {
 export default App
 
 // Практика 1:
-// Напишите приложение калькулятор, которое принимает
-// два числа в инпуты и возводит первое в степень 
-// второго при клеке на кнопку "="
-// Примечание: все функции, кроме компонентов
-//  должны импортироваться из файла /utils/calc.js
+// Напишите компонент, ToggleButton
+//  Это кнопка, которая имеет сотояния "Вкл" и "Выкл"
+// Состояние меняется при каждом клике
+// Помимо этого при каждом клике в консоль должно выводиться
+//  Текущее число кликов (используйте useRef)
 
 
 
