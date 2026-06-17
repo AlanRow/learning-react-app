@@ -4,17 +4,49 @@ import Stopwatch from "./components/Stopwatch"
 import ToggleButton from './components/ToggleButton';
 
 function App() {
-  const inputRef = useRef(null)
+  const [filterName, setFilterName] = useState("");
 
-  function focusInput() {
-    inputRef.current.focus()
+  const [flag, setFlag] = useState(true)
+
+  const allFilms = [
+    "451 по Фаренгейту",
+    "Игра Престолов",
+    "Игра Эндера",
+    "Властелин Колец"
+  ]
+
+  function getFilteredFilms(films, name) {
+    console.log("Filtering...")
+    return films.filter((f) => f.includes(name))
   }
+
+  // Вариант 1
+  const filteredFilms = getFilteredFilms(allFilms, filterName)
+
+  // Вариант 2, имеет смысл если getFilteredFilms, это обращение к АПИ
+  // const [filteredFilms, setFilteredFilms] = useState([])
+
+  // useEffect(() => {
+  //   setFilteredFilms(getFilteredFilms(allFilms, filterName))
+  // }, [filterName])
 
   return (
     <>
     <div>
-      <label onClick={focusInput}>Input: </label>
-      <input ref={inputRef}></input>
+      <form>
+        <div>
+          <input
+            value={filterName}
+            onChange={(e) => setFilterName(e.target.value)}
+            />
+        </div>
+      </form>
+
+      <button onClick={() => setFlag(!flag)}>{ flag ? "On" : "Off" }</button>
+
+      <ul>
+        { filteredFilms.map((film) => <li key={film}>{film}</li>)}
+      </ul>
     </div>
     </>
   )
