@@ -1,52 +1,65 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useReducer } from 'react'
 import './App.css'
 import Stopwatch from "./components/Stopwatch"
 import ToggleButton from './components/ToggleButton';
 
-function App() {
-  const [filterName, setFilterName] = useState("");
 
-  const [flag, setFlag] = useState(true)
+const defaultSecuritySettings = [
+  {
+    key: "oauth",
+    name: "OAuth",
+    enabled: true
+  },
+  {
+    key: "2fa",
+    name: "2FA",
+    enabled: false
+  },
+  {
+    key: "password",
+    name: "Пароль",
+    enabled: false
+  },
+  {
+    key: "sms",
+    name: "SMS-код",
+    enabled: false
+  },
+]
 
-  const allFilms = [
-    "451 по Фаренгейту",
-    "Игра Престолов",
-    "Игра Эндера",
-    "Властелин Колец"
-  ]
-
-  function getFilteredFilms(films, name) {
-    console.log("Filtering...")
-    return films.filter((f) => f.includes(name))
+function checkboxesReducer(state, action) {
+  if (action.type === "toggle") {
+    return state.map(
+        (setting) => setting.key === action.payload ? 
+          { ...setting, enabled: !setting.enabled } :
+          setting
+      )
   }
+}
 
-  // Вариант 1
-  const filteredFilms = getFilteredFilms(allFilms, filterName)
+function App() {
+  const [ securitySettings, dispatchSettings ] = useReducer(
+    checkboxesReducer,
+    defaultSecuritySettings
+  )
 
-  // Вариант 2, имеет смысл если getFilteredFilms, это обращение к АПИ
-  // const [filteredFilms, setFilteredFilms] = useState([])
-
-  // useEffect(() => {
-  //   setFilteredFilms(getFilteredFilms(allFilms, filterName))
-  // }, [filterName])
+  function toggleCheckbox(key) {
+    dispatchSettings({ type: "toggle", payload: key })
+  }
 
   return (
     <>
     <div>
-      <form>
-        <div>
+      { securitySettings.map((setting) => (
+        <label key={setting.key}>
+          { setting.name }
           <input
-            value={filterName}
-            onChange={(e) => setFilterName(e.target.value)}
-            />
-        </div>
-      </form>
-
-      <button onClick={() => setFlag(!flag)}>{ flag ? "On" : "Off" }</button>
-
-      <ul>
-        { filteredFilms.map((film) => <li key={film}>{film}</li>)}
-      </ul>
+            type="checkbox"
+            checked={setting.enabled}
+            onChange={() => toggleCheckbox(setting.key)}
+          />
+        </label>
+      )) } 
     </div>
     </>
   )
@@ -54,20 +67,11 @@ function App() {
 
 export default App
 
-// Практика 1:
-// Создайте веб-страницу, которая содержит
-// список настроек безопасности профиля пользователя
-// (использовать OAuth, использовать пароль,
-// 2FA использовать, SMS код)
-// Настройки должны хранится в виде списка объектов
-//  с тремя свойствами:
-//    enabled (boolean),
-//    name (string),
-//    key (string)
-
-// При отрисовке они должны рисоваться как чекбоксы
-// с подписями, весь список ххранится как одна
-// реактивная перменная
+// Практика 2: Новый Счетчик
+// Напишите стандартный счетчик с кнопками + и -
+// Но используя useReducer (у вас будет два action.type):
+//  1) "plus"
+//  2) "minus"
 
 
 
