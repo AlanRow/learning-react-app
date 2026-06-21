@@ -1,0 +1,37 @@
+.todo-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
+}
+
+.todo-card h3 {
+  margin: 0 0 8px;
+}
+
+.todo-card p {
+  margin: 0 0 12px;
+  color: #555;
+}
+
+.todo-card button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #1976d2;
+  color: white;
+}
+
+.todo-card.done {
+  opacity: 0.7;
+  background-color: #f1f8e9;
+}
+
+.todo-card.done h3,
+.todo-card.done p {
+  text-decoration: line-through;
+}
