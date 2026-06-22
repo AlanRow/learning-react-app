@@ -1,65 +1,24 @@
 import { useState, useEffect, useRef, useReducer } from 'react'
 import './App.css'
-import Stopwatch from "./components/Stopwatch"
-import ToggleButton from './components/ToggleButton';
-
-
-const defaultSecuritySettings = [
-  {
-    key: "oauth",
-    name: "OAuth",
-    enabled: true
-  },
-  {
-    key: "2fa",
-    name: "2FA",
-    enabled: false
-  },
-  {
-    key: "password",
-    name: "Пароль",
-    enabled: false
-  },
-  {
-    key: "sms",
-    name: "SMS-код",
-    enabled: false
-  },
-]
-
-function checkboxesReducer(state, action) {
-  if (action.type === "toggle") {
-    return state.map(
-        (setting) => setting.key === action.payload ? 
-          { ...setting, enabled: !setting.enabled } :
-          setting
-      )
-  }
-}
+import ThemeForm from './components/ThemeForm copy'
+import { THEME_MODE } from './const'
 
 function App() {
-  const [ securitySettings, dispatchSettings ] = useReducer(
-    checkboxesReducer,
-    defaultSecuritySettings
-  )
+  const [ theme, setTheme ] = useState(THEME_MODE.LIGHT)
 
-  function toggleCheckbox(key) {
-    dispatchSettings({ type: "toggle", payload: key })
+  function toggleTheme() {
+    if (theme === THEME_MODE.LIGHT) {
+      setTheme(THEME_MODE.DARK)
+    } else {
+      setTheme(THEME_MODE.LIGHT)
+    }
   }
 
   return (
     <>
+    <button onClick={toggleTheme}>{ theme }</button>
     <div>
-      { securitySettings.map((setting) => (
-        <label key={setting.key}>
-          { setting.name }
-          <input
-            type="checkbox"
-            checked={setting.enabled}
-            onChange={() => toggleCheckbox(setting.key)}
-          />
-        </label>
-      )) } 
+      <ThemeForm theme={theme} />
     </div>
     </>
   )
@@ -67,12 +26,6 @@ function App() {
 
 export default App
 
-// Практика 1: Числа Фиббоначчи
-// Напишите сайт, который выводит список чисел Фиббоначчи
-// Изначально их всего 2
-// Есть две кнопки: "Добавить новое" и "Удалить последнее"
-// Реализуйте их при помощи useReducer
-//  1, 1, 2, 3, 5, 8
 
 
 

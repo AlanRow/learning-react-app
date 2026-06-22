@@ -1,0 +1,10 @@
+input.light {
+    background-color: white;
+    color: black;
+}
+
+input.dark {
+    background-color: black;
+    color: white;
+}
+
