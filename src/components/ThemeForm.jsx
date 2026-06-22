@@ -1,10 +1,10 @@
 import ThemeButton from "./ThemeButton";
 import ThemeInput from "./ThemeInput";
 
-function ThemeForm({ theme }) {
+function ThemeForm({ }) {
     return (<form>
-        <ThemeInput theme={theme} value="Username" />
-        <ThemeButton theme={theme} text="Ok" />
+        <ThemeInput value="Username" />
+        <ThemeButton text="Ok" />
     </form>)
 }
 

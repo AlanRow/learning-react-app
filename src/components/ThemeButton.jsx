@@ -1,6 +1,11 @@
-import "./ThemeButton.css";
+import { useContext, createContext } from "react";
 
-function ThemeButton({ text, onClick, theme }) {
+import "./ThemeButton.css";
+import { THEME_MODE } from "../const";
+import ThemeContext from "../ThemeContext";
+
+function ThemeButton({ text, onClick }) {
+    const theme = useContext(ThemeContext)
     return (<button className={theme}>{ text }</button>)
 }
 
