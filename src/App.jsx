@@ -1,27 +1,26 @@
-import { useState, useEffect, useRef, useReducer, createContext } from 'react'
+import { useState, memo } from 'react'
 import './App.css'
-import ThemeForm from './components/ThemeForm'
-import { THEME_MODE } from './const'
-import ThemeContext from './ThemeContext'
+import List from './components/List'
+
+const MemoizedList = memo(List)
 
 function App() {
-  const [ theme, setTheme ] = useState(THEME_MODE.DARK)
-
-  function toggleTheme() {
-    if (theme === THEME_MODE.LIGHT) {
-      setTheme(THEME_MODE.DARK)
-    } else {
-      setTheme(THEME_MODE.LIGHT)
-    }
-  }
+  const [ toggle, setToggle ] = useState(true)
+  const [length, setLength] = useState(1)
 
   return (
     <>
-    <button onClick={toggleTheme}>{ theme }</button>
     <div>
-      <ThemeContext value={theme}>
-        <ThemeForm />
-      </ThemeContext>
+      <button onClick={() => setToggle(!toggle)}>
+        { toggle ? "Вкл." : "Выкл." }
+      </button>
+      <MemoizedList length={length} />
+      <button onClick={() => setLength(length - 1)}>
+        -
+      </button>
+      <button onClick={() => setLength(length + 1)}>
+        +
+      </button>
     </div>
     </>
   )
@@ -29,13 +28,15 @@ function App() {
 
 export default App
 
-// Практика 1: разные валюты
-// Вам нужно задать на сайте возможность переключать валюту
-// (Р и $), при этом у вас есть компонент PriceSpan,
-//  который выодит стоимость со знаком валюты в конце
-// наприме: "100 Р" или "20$"
-//  Напишите этот компонент и передайте туда знак,
-// используя useContext и createContext
+// Практика 1:
+//  Добавьте компонент Button, с параметром text 
+//  в его props
+//  Вставьте в App.jsx мемоизированный компонент 
+//  MemoizedButton
+//  Добавьте в компонент Button console.log
+//  или alert, который будем вызываться при каждом
+//  рендере
+
 
 
 
