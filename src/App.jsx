@@ -1,5 +1,9 @@
-import { useState, useMemo, useEffect } from 'react'
+import { useState, useMemo, useEffect, useCallback } from 'react'
 import './App.css'
+
+function helloWorld() {
+  console.log("Hello, World!")
+}
 
 function App() {
   const [ toggle, setToggle ] = useState(true)
@@ -7,14 +11,10 @@ function App() {
   const [a, setA] = useState(1)
   const [b, setB] = useState(1)
 
-  function helloWorld() {
-    console.log("Hello, World!")
-  }
-
-  function getSum() {
+  const getSum = useCallback(() => {
     console.log("Sum calculating...")
     return a + b
-  }
+  }, [a, b])
 
   useEffect(() => {
     console.log("Sum function changed")
@@ -47,7 +47,12 @@ function App() {
 
 export default App
 
-
+// Практика 1
+//  Создайте с помощью useCallback функцию helloUser, 
+//  которая выводит alert "Hello, {user}!" и обновляется 
+//  только при изменении имени пользователя
+//  Доп. задание: добавьте инпут, который позволит вводить 
+//  и изменять имя пользователя 
 
 
 
